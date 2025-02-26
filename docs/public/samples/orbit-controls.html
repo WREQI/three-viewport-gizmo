@@ -24,8 +24,9 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/",
+          "three": "https://unpkg.com/three@0.173.0/build/three.webgpu.js",
+
+          "three/addons/": "https://unpkg.com/three@0.173.0/examples/jsm/",
           "three-viewport-gizmo": "https://unpkg.com/three-viewport-gizmo@2.1.0/dist/three-viewport-gizmo.js"
         }
       }
@@ -33,6 +34,7 @@
 
     <script type="module">
       import * as THREE from "three";
+      // import * as THREE from "./three-dev/build/three.webgpu.js";
       import { OrbitControls } from "three/addons/controls/OrbitControls.js";
       import { ViewportGizmo } from "three-viewport-gizmo";
       import { loadThreeModel } from "./common/threeModel.js";
@@ -48,7 +50,13 @@
 
       const scene = new THREE.Scene();
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      // const renderer = new THREE.WebGLRenderer({
+      //   antialias: true,
+      // });
+      const renderer = new THREE.WebGPURenderer({
+        antialias: true,
+        forceWebGL: true,
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setAnimationLoop(animation);
       document.body.appendChild(renderer.domElement);
